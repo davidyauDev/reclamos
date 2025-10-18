@@ -26,12 +26,12 @@
                                     "email": {
                                         "type": "string",
                                         "format": "email",
-                                        "example": "juan@example.com"
+                                        "example": "test@example.com"
                                     },
                                     "password": {
                                         "type": "string",
                                         "format": "password",
-                                        "example": "secret123"
+                                        "example": "password"
                                     }
                                 },
                                 "type": "object"
