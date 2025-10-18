@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Reclamos API",
-        "description": "API para gestión de reclamos",
+        "title": "Company API",
+        "description": "API documentation for managing companies.",
         "version": "1.0.0"
     },
     "paths": {
@@ -128,9 +128,356 @@
                     }
                 ]
             }
+        },
+        "/api/companies": {
+            "get": {
+                "tags": [
+                    "Companies"
+                ],
+                "summary": "Get list of companies",
+                "operationId": "80eb39cf3f8d7b480171fea2f33d6060",
+                "parameters": [
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of companies per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Company"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Companies"
+                ],
+                "summary": "Create a new company",
+                "operationId": "cee123b1da67beec88470f8ceb3fcb95",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreCompanyRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Company created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Company"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/companies/{id}": {
+            "get": {
+                "tags": [
+                    "Companies"
+                ],
+                "summary": "Get a company by ID",
+                "operationId": "fd3858af6b6071f4a94538a412bab106",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the company",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Company"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Companies"
+                ],
+                "summary": "Update a company",
+                "operationId": "c125e6ebfb9c7669666225b619092333",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the company",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateCompanyRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Company updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Company"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Companies"
+                ],
+                "summary": "Delete a company",
+                "operationId": "124aa61ff352c83ede5872644b0ac00d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the company",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Company deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
+        "schemas": {
+            "Company": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Example Company"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "example@company.com"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-10-18T12:34:56Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-10-18T12:34:56Z"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreCompanyRequest": {
+                "required": [
+                    "ruc",
+                    "razon_social",
+                    "departamento",
+                    "provincia",
+                    "distrito",
+                    "direccion"
+                ],
+                "properties": {
+                    "ruc": {
+                        "description": "RUC de la empresa (11 dígitos)",
+                        "type": "string",
+                        "example": "12345678901"
+                    },
+                    "razon_social": {
+                        "description": "Razón social de la empresa",
+                        "type": "string",
+                        "example": "Mi Empresa S.A."
+                    },
+                    "departamento": {
+                        "description": "Departamento de la empresa",
+                        "type": "string",
+                        "example": "Lima"
+                    },
+                    "provincia": {
+                        "description": "Provincia de la empresa",
+                        "type": "string",
+                        "example": "Lima"
+                    },
+                    "distrito": {
+                        "description": "Distrito de la empresa",
+                        "type": "string",
+                        "example": "Miraflores"
+                    },
+                    "direccion": {
+                        "description": "Dirección de la empresa",
+                        "type": "string",
+                        "example": "Av. Siempre Viva 123"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateCompanyRequest": {
+                "required": [
+                    "ruc",
+                    "razon_social",
+                    "departamento",
+                    "provincia",
+                    "distrito",
+                    "direccion"
+                ],
+                "properties": {
+                    "ruc": {
+                        "description": "RUC de la empresa (11 dígitos)",
+                        "type": "string",
+                        "example": "12345678901"
+                    },
+                    "razon_social": {
+                        "description": "Razón social actualizada de la empresa",
+                        "type": "string",
+                        "example": "Mi Empresa Actualizada S.A."
+                    },
+                    "departamento": {
+                        "description": "Departamento de la empresa",
+                        "type": "string",
+                        "example": "Lima"
+                    },
+                    "provincia": {
+                        "description": "Provincia de la empresa",
+                        "type": "string",
+                        "example": "Lima"
+                    },
+                    "distrito": {
+                        "description": "Distrito de la empresa",
+                        "type": "string",
+                        "example": "San Isidro"
+                    },
+                    "direccion": {
+                        "description": "Dirección actualizada de la empresa",
+                        "type": "string",
+                        "example": "Av. Nueva 456"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "securitySchemes": {
             "bearerAuth": {
                 "type": "http",
@@ -143,6 +490,10 @@
         {
             "name": "Auth",
             "description": "Operaciones de autenticación"
+        },
+        {
+            "name": "Companies",
+            "description": "API Endpoints for Companies"
         }
     ]
 }

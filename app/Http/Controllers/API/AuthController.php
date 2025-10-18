@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 /**
- * @OA\Info(title="Reclamos API", version="1.0.0", description="API para gestión de reclamos")
- *
  * @OA\Tag(
  *   name="Auth",
  *   description="Operaciones de autenticación"
