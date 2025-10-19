@@ -51,6 +51,7 @@ class BooksController extends Controller
      *     path="/api/books",
      *     tags={"Books"},
      *     summary="Get list of books",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
@@ -76,6 +77,7 @@ class BooksController extends Controller
      *     path="/api/books",
      *     tags={"Books"},
      *     summary="Create a new book",
+     *     security={{"bearerAuth":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/Book")
@@ -131,6 +133,7 @@ class BooksController extends Controller
      *     path="/api/books/{id}",
      *     tags={"Books"},
      *     summary="Update a book",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -192,6 +195,7 @@ class BooksController extends Controller
      *     path="/api/books/{id}",
      *     tags={"Books"},
      *     summary="Delete a book",
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
