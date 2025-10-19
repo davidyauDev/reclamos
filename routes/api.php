@@ -14,8 +14,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::apiResource('companies', CompanyController::class);
     Route::apiResource('books', BooksController::class);
-    // Books (solo usuarios autenticados)
-
 });
 
 Route::get('health', function (Request $request) {
